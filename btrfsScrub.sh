@@ -1,5 +1,5 @@
 source ./btrfsUtils.sh
-umountFs /mnt
+umountFs /mnt &> /dev/null
 wipeFs &> /dev/null
 
 if [ $# -ne 1 ]
@@ -10,15 +10,24 @@ fi
 tarFile=$1
 
 echo "*********** Creation ***********"
-createFs raid1 raid1 
+createFs 
 mountFs /mnt
-btrfsDf /mnt
 df -h /mnt
 
 echo "*********** Untar a file ********" 
-#tar xf $tarFile -C /mnt
+tar xf $tarFile -C /mnt
 showFs 
 
 
-#umountFs /mnt
-#wipeFs
+echo "******** Start the scrub *******"
+echo "******* btrfs scrub start /mnt ******"
+btrfs scrub start /mnt
+
+sleep 5
+
+echo "******** Status of the scrub ******"
+echo "******* btrfs scrub status /mnt ******"
+btrfs scrub status /mnt
+
+umountFs /mnt
+wipeFs

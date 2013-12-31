@@ -9,10 +9,12 @@ function createFs()
 {
 	if [ $# -ne 2 ]
 	then
+		echo " ****** mkfs.btrfs $disk1 $disk2 $disk3 ****"
 		mkfs.btrfs $disk1 $disk2 $disk3 &> /dev/null
 	else
 		metaRaid=$1
 		dataRaid=$2
+		echo "****** mkfs.btrfs -m $metaRaid -d $dataRaid $disk1 $disk2 $disk3 $disk4 ******** "
 		mkfs.btrfs -m $metaRaid -d $dataRaid $disk1 $disk2 $disk3 $disk4 &> /dev/null
 	fi
 
@@ -32,6 +34,7 @@ function labelFs()
 
 function wipeFs()
 {
+	echo "******** wipefs -a $disk1 $disk2 $disk3 $disk4 ****"
 	wipefs -a $disk1 $disk2 $disk3 $disk4 &> /dev/null
 }
 
@@ -44,6 +47,7 @@ function showFs()
 function mountFs()
 {
 	mntPt=$1
+	echo "******* mount $disk1 $mntPt ******"
 	mount $disk1 $mntPt
 }
 
@@ -56,6 +60,7 @@ function umountFs()
 function btrfsDf()
 {
 	mntPt=$1
+	echo " ******** btrfs fi df $mntPt ***** " 
 	btrfs fi df $mntPt 
 }
 
