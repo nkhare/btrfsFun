@@ -23,7 +23,7 @@ echo "******** Start the scrub *******"
 echo "******* btrfs scrub start /mnt ******"
 btrfs scrub start /mnt
 
-sleep 5
+sleep 2
 
 echo "******** Status of the scrub ******"
 echo "******* btrfs scrub status /mnt ******"

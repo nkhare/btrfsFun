@@ -41,6 +41,7 @@ function wipeFs()
 function showFs()
 {
  	label=$1
+	echo "****** btrfs filesystem show $label ******"
 	btrfs filesystem show $label
 }
 
